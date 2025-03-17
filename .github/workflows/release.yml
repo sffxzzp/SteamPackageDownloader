@@ -1,0 +1,19 @@
+name: Release
+
+on: 
+  release:
+    types: [created]
+
+jobs:
+  releases-matrix:
+    name: Build & Release Go Binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: wangyoucao577/go-release-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: windows
+          goarch: amd64
+          goversion: 1.24
+          ldflags: -s -w
